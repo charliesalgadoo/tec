@@ -93,64 +93,10 @@
 
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                    <td class="fw-bold">1</td>
-                    <td>FULLNAME</td>
-                    <td>AKJAJLKSALKJALK</td>
-                    <td>2481052470</td>
-                    <td>correo@mail.com</td>
-                    <td class="text-primary">password</td>
-                    <td>
-                        <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn text-primary btn-editar" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modalEditar"
-                                data-id="1" 
-                                data-fullname="Megan Ariadna"
-                                data-curp="CAME090919MPLLRMAJ"
-                                data-phone="2481052470"
-                                data-mail="correo@mail.com"
-                                data-password="password">
-                            <i class="far fa-edit fs-5"></i>
-                        </button>
-                        
-                        <button type="button" class="btn text-danger btn-borrar" data-id="ALU-202601">
-                            <i class="far fa-trash-alt fs-5"></i>
-                        </button>
-                        </div>
-                    </td>
-                    </tr>
-
-
-
-                    <tr>
-                    <td class="fw-bold">2</td>
-                    <td>Ana Martínez López</td>
-                    <td>AKJAJLKSALKJALK</td>
-                    <td>2481052470</td>
-                    <td>correo@mail.com</td>
-                    <td class="text-primary">password</td>
-                    <td>
-                        <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn text-primary btn-editar" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modalEditar"
-                                data-id="2" 
-                                data-fullname="Ana Martínez López" 
-                                data-curp="CAME090919MPLLRMAJ"
-                                data-phone="2481052470"
-                                data-mail="correo@mail.com"
-                                data-password="password">
-                            <i class="far fa-edit fs-5"></i>
-                        </button>
-                        
-                        <button type="button" class="btn text-danger btn-borrar" data-id="ALU-202601">
-                            <i class="far fa-trash-alt fs-5"></i>
-                        </button>
-                        </div>
-                    </td>
-                    </tr>
+            <tbody>    
+              <?php
+                include_once("../services/get_students.php");
+              ?>       
             </tbody>
           </table>
       </div>
@@ -208,37 +154,37 @@
         <h5 class="modal-title" id="modalEditarLabel">Añadir Alumno</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form id="formEditar">
+      <form id="formAgregar" method="POST" action="../services/register_student.php">
         <div class="modal-body">
           <input type="hidden" id="edit-id">
           
           <div class="mb-3">
             <label class="form-label">Nombre Completo</label>
-            <input type="text" class="form-control" id="edit-fullname" required>
+            <input type="text" class="form-control" name="fullName" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Curp</label>
-            <input type="text" class="form-control" id="edit-curp" required>
+            <input type="text" class="form-control" name="curp" required>
           </div>
  
           <div class="mb-3">
             <label class="form-label">Número de teléfono</label>
-            <input type="text" class="form-control" id="edit-phone" required>
+            <input type="text" class="form-control" name="phone" required>
           </div>
 
             <div class="mb-3">
             <label class="form-label">Correo</label>
-            <input type="text" class="form-control" id="edit-mail" required>
+            <input type="text" class="form-control" name="email" required>
           </div>
             
           <div class="mb-3">
             <label class="form-label">Contraseña</label>
-            <input type="text" class="form-control" id="edit-password" required>
+            <input type="text" class="form-control" name="password" required>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="submit" class="btn btn-primary">Agregar alumno</button>
         </div>
       </form>
     </div>
