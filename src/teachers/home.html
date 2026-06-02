@@ -66,12 +66,12 @@
       </div>
     </nav>
     <div class="body-container w-100 text-center py-5 m-auto text-align-center p-5 m-5 border-5 m-5">
-    <h1>Bienvenido, Kevin</h1>
+    <h1 id="greet-hour">Kevin</h1>
       <h3 class="text-secondary">Tus accesos directos:</h2> <br>
 
         
-        <row>
-        <div class="col-sm-6">
+        <row class="d-flex">
+        <div class="col-sm-2">
         <div class="card">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
@@ -82,7 +82,7 @@
         </div>
       </div>
 
-      <div class="col-sm-6 ">
+      <div class="col-sm-2">
       <div class="card">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
@@ -93,7 +93,7 @@
       </div>
       </div>
 
-      <div class="col-sm-6">
+      <div class="col-sm-2">
       <div class="card">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
@@ -107,5 +107,24 @@
     </row>
 
     </div>
+    <script>
+      const greetContainer = document.getElementById('greet-hour');
+
+      if(greetContainer){
+        const now = new Date();
+        const time = now.getHours();
+
+        let greet = "";
+
+        if(time>=0 && time < 12){
+          greet="Buenos días, ";
+        } else if(time>=12 && time<19){
+          greet="Buenas tardes, ";
+        }else{
+          greet="Buenas noches, ";
+        }
+        greetContainer.prepend(greet);
+      }
+    </script>
 </body>
 </html>
