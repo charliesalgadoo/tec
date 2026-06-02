@@ -13,7 +13,7 @@
    
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="home.html">
             <img src="../assets/logo-transparent-white.png" alt="Bootstrap" width="150" height="auto">
           </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,11 +22,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+              <a class="nav-link active" aria-current="page" href="home.html">Inicio</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Yo</a>
+              <a class="nav-link" href="me.html">Yo</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -35,9 +35,9 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="scores.html">Calificaciones</a></li>
-                <li><a class="dropdown-item" href="#">Asistencias</a></li>
+                <li><a class="dropdown-item" href="attendances.html">Asistencias</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="students.html">Administra tus alumnos</a></li>
               </ul>
             </li>
             
@@ -48,7 +48,7 @@
           <ul class="nav justify-content-end">
             <li class="nav-item">
                 <li class="nav-item">
-                    <a class="btn btn-outline-danger" href="login.html">Cerrar sesión</a>
+                    <a class="btn btn-outline-danger" href="../.html">Cerrar sesión</a>
                   </li>
               </li>
           </ul>
@@ -65,8 +65,46 @@
         </div>
       </div>
     </nav>
-    <div class="body-container w-100 m-auto text-align-center p-5 m-5 border-5 m-5">
-    <h1>Bienvenido, usuario</h1>
+    <div class="body-container w-100 text-center py-5 m-auto text-align-center p-5 m-5 border-5 m-5">
+    <h1>Bienvenido, Kevin</h1>
+      <h3 class="text-secondary">Tus accesos directos:</h2> <br>
+
+        
+        <row>
+        <div class="col-sm-6">
+        <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Editar calificaciones</h5>
+          <p class="card-text">Añade, edita y administra las calificaciones de tu grupo.</p>
+          <a href="#" class="btn btn-primary">Ir</a>
+        </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 ">
+      <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Tomar asistencia</h5>
+          <p class="card-text">Reistra las asistencias, coloca justificantes y administra los ingresos de tu grupo.</p>
+          <a href="#" class="btn btn-primary">Ir</a>
+        </div>
+      </div>
+      </div>
+
+      <div class="col-sm-6">
+      <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Administrar alumnos</h5>
+          <p class="card-text">Administra la información de tu grupo como nombre, correo, teléfono, etc.</p>
+          <a href="#" class="btn btn-primary">Ir</a>
+        </div>
+      </div>
+      </div>
+
+    </row>
 
     </div>
 </body>
