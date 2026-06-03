@@ -7,11 +7,12 @@
     $password = $_POST['password'];
     $curp = $_POST['curp'];
     $phone = $_POST['phone'];
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $hash = password_hash($password, PASSWORD_DEFAULT);
 
     $sql_user = "INSERT INTO users (email, pass, user_role) VALUES (?, ?, 'STUDENT')";
     $stmt_user = $conn->prepare($sql_user);
-    $stmt_user->bind_param("ss", $email, $hashedPassword);
+    $stmt_user->bind_param("ss", $email, $hash);
     $stmt_user->execute();
 
     $userId = $conn->insert_id;
@@ -28,7 +29,6 @@
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-<title>Calificaciones | Maestros</title>
 <link rel="icon" type="svg+xml" href="../assets/logo-icon.svg" />
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </head>

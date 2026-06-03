@@ -13,6 +13,4 @@
         die ("Error de conexion: " . $conn->connect_error);
     }
 
-    echo "Conexion exitosaaaa <br>";
-
 ?>

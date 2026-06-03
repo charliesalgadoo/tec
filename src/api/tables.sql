@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS teachers (
     full_name VARCHAR(45),
     phone_number VARCHAR(12) UNIQUE,
     user_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS students (
@@ -36,6 +36,17 @@ CREATE TABLE IF NOT EXISTS attendances (
     subject_id INT,
     FOREIGN KEY (subject_id) REFERENCES subjects(id)
 );
+
+CREATE TABLE IF NOT EXISTS attendances_details(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    attendance_id INT,
+    student_id INt,
+    status TINYINY(1),
+    FOREIGN KEY (attendance_id) REFERENCES attendances(id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+);
+
+
 
 CREATE TABLE IF NOT EXISTS scores (
     id INT PRIMARY KEY AUTO_INCREMENT,

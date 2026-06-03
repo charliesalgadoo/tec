@@ -103,34 +103,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                    <td class="fw-bold">1</td>
-                    <td>FULLNAME</td>
-                    <form>
-                    <fieldset>
-                        <td><input type="radio" id="contactChoice1" name="contact" value="email"/></td>
-                        <td><input type="radio" id="contactChoice1" name="contact" value="email" /></td>
-                    </fieldset>
-                </form>
-                    <td>
-                    </td>
-                    </tr>
-
-                <tr>
-                    <td class="fw-bold">1</td>
-                    <td>FULLNAME</td>
-                    <form>
-                    <fieldset>
-                        <td><input type="radio" id="contactChoice1" name="contact" value="email"/></td>
-                        <td><input type="radio" id="contactChoice1" name="contact" value="email" /></td>
-                    </fieldset>
-                    </form>
-                    <td>
-                    </td>
-                    </tr>
-
-
-
+              <?php
+                include_once("../services/attendance/get_students.php");
+              ?>
+              
             </tbody>
           </table>
       </div>
