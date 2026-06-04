@@ -217,6 +217,8 @@
             form.action = '../services/register_student.php';
             form.reset() // Holaa charly, con esto se limpia solo el formulario verdad? asjdha
             document.getElementById('student-id').value = "";
+            document.getElementById('student-mail').disabled = false;
+            document.getElementById('student-password').disabled = false;
 
           } else {
             

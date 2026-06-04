@@ -14,13 +14,14 @@ CREATE TABLE IF NOT EXISTS teachers (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+--- TODO: ON DELETE CASCADE
 CREATE TABLE IF NOT EXISTS students (
     id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(45),
     curp VARCHAR(18), 
     phone_number VARCHAR(12) UNIQUE,
     user_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS subjects (
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS attendances_details(
     id INT PRIMARY KEY AUTO_INCREMENT,
     attendance_id INT,
     student_id INt,
-    status TINYINY(1),
+    status TINYINT(1),
     FOREIGN KEY (attendance_id) REFERENCES attendances(id) ON DELETE CASCADE,
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );

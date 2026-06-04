@@ -90,25 +90,9 @@
         
 
         <div class="table-responsive">
-          <table class="table">
-            <thead class="table-light text-secondary">
-              <tr>
-                <th scope="col" class="py-3">ID</th>
-                <th scope="col" class="py-3">Nombre completo</th>
-                <th scope="col" class="py-3">Asistió</th>
-                <th scope="col" class="py-3">No asistió</th>
-
-                
-
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-                include_once("../services/attendance/get_students.php");
-              ?>
-              
-            </tbody>
-          </table>
+          <?php
+            include_once("../services/attendance/get_students.php");
+          ?>
       </div>
     </div>
   </div>
