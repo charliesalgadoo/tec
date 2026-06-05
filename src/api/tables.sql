@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS teachers (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
---- TODO: ON DELETE CASCADE
 CREATE TABLE IF NOT EXISTS students (
     id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(45),
@@ -47,8 +46,6 @@ CREATE TABLE IF NOT EXISTS attendances_details(
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
 
-
-
 CREATE TABLE IF NOT EXISTS scores (
     id INT PRIMARY KEY AUTO_INCREMENT,
     parcial_1 INT,
@@ -74,3 +71,31 @@ CREATE TABLE IF NOT EXISTS groups_students (
     FOREIGN KEY (student_id) REFERENCES students(id),
     FOREIGN KEY (group_id) REFERENCES groups(id)
 );
+
+INSERT INTO users (email, pass, user_role) VALUES 
+('carlossalgado@cetis17.edu.mx', '$2y$10$dUPPzjvLTCmLmHm.Qf6ob.wmB76b3CdrgH/4yvFVlEPv0RCzIUyfG', 'TEACHER'),
+('jonathanbonilla@cetis17.edu.mx', '$2y$10$dUPPzjvLTCmLmHm.Qf6ob.wmB76b3CdrgH/4yvFVlEPv0RCzIUyfG', 'TEACHER');
+
+INSERT INTO teachers (full_name, phone_number, user_id) VALUES 
+('Carlos Salgado', '2481366425', 1),
+('Jonathan Bonilla', '2481167087', 2);
+
+INSERT INTO subjects (subject_name, teacher_id) VALUES 
+('Implementa bases de datos', 1),
+('Matematicas', 2);
+
+INSERT INTO groups (group_name, teacher_id) VALUES 
+('4A', 1),
+('4B', 2);
+
+INSERT INTO users (email, pass, user_role) VALUES 
+('alumno.uno@cetis17.edu.mx', 'xxx', 'STUDENT'),
+('alumno.dos@cetis17.edu.mx', 'xxx', 'STUDENT');
+
+INSERT INTO students (full_name, curp, phone_number, user_id) VALUES 
+('Juan Pérez', 'PERJ080101HDFRRN01', '5550001111', 3),
+('María López', 'LOPM080202MDFRRN02', '5550002222', 4);
+
+INSERT INTO groups_students (enrollment_date, student_id, group_id) VALUES 
+('2026-06-03', 1, 1),
+('2026-06-03', 2, 1);

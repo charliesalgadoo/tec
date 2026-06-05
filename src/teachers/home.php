@@ -34,8 +34,8 @@
                 Estudiantes
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="scores.html">Calificaciones</a></li>
-                <li><a class="dropdown-item" href="attendances.html">Asistencias</a></li>
+                <li><a class="dropdown-item" href="scores.php">Calificaciones</a></li>
+                <li><a class="dropdown-item" href="attendances.php">Asistencias</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="students.php">Administra tus alumnos</a></li>
               </ul>
@@ -48,7 +48,7 @@
           <ul class="nav justify-content-end">
             <li class="nav-item">
                 <li class="nav-item">
-                    <a class="btn btn-outline-danger" href="../.html">Cerrar sesión</a>
+                    <a class="btn btn-outline-danger" href="../login.php">Cerrar sesión</a>
                   </li>
               </li>
           </ul>
@@ -66,15 +66,14 @@
       </div>
     </nav>
     <div class="body-container w-100 text-center py-5 m-auto text-align-center p-5 m-5 border-5 m-5">
-    <h1 id="greet-hour">Kevin</h1>
+    <h1 id="greet-hour">Carlos</h1>
       <h3 class="text-secondary">Tus accesos directos:</h2> <br>
 
-        
-        <row class="d-flex">
-        <div class="col-sm-2">
+         <div class="col-sm-2">
         <div class="card">
-        <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
+          <img src="../assets/icons/star.svg" width="50px">
+          <br><br>
           <h5 class="card-title">Editar calificaciones</h5>
           <p class="card-text">Añade, edita y administra las calificaciones de tu grupo.</p>
           <a href="#" class="btn btn-primary">Ir</a>
@@ -84,8 +83,9 @@
 
       <div class="col-sm-2">
       <div class="card">
-        <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
+          <img src="../assets/icons/person-check.svg" width="50px">
+           <br> <br>
           <h5 class="card-title">Tomar asistencia</h5>
           <p class="card-text">Reistra las asistencias, coloca justificantes y administra los ingresos de tu grupo.</p>
           <a href="#" class="btn btn-primary">Ir</a>
@@ -95,8 +95,9 @@
 
       <div class="col-sm-2">
       <div class="card">
-        <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
+          <img src="../assets/icons/person-gear.svg" width="50px">
+          <br><br>
           <h5 class="card-title">Administrar alumnos</h5>
           <p class="card-text">Administra la información de tu grupo como nombre, correo, teléfono, etc.</p>
           <a href="#" class="btn btn-primary">Ir</a>
@@ -104,7 +105,7 @@
       </div>
       </div>
 
-    </row>
+
 
     </div>
     <script>
