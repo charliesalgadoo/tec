@@ -7,7 +7,7 @@
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    <title>Calificaciones | Maestros</title>
+    <title>Tus asistencias | Alumnos</title>
     <link rel="icon" type="svg+xml" href="../assets/logo-icon.svg" />
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   </head>
@@ -68,10 +68,10 @@
       </div>
     </nav>
     <div class="body-container w-100 text-center py-5 m-auto text-align-center p-5 m-5 border-5 m-5">
-    <h1>Calificaciones</h1>
-    <h5 class="text-danger">*Nota: los cambios que hagas aquí son irreversibles. Registra con precaución.</h3>
+    <h1>Asistencias</h1>
 
-        
+        <label>Ver asistencia del día: </label>
+
         <input 
             type="date" 
             id="dateAttendance" 
@@ -81,7 +81,7 @@
         >
 
         <br><br>
-
+        <button class="btn btn-outline-secondary" data-bs-toggle="modal">Buscar</button>
 
         
   <div class="container">
@@ -108,26 +108,15 @@
                     <td>FULLNAME</td>
                     <form>
                     <fieldset>
-                        <td><input type="radio" id="contactChoice1" name="contact" value="email"/></td>
-                        <td><input type="radio" id="contactChoice1" name="contact" value="email" /></td>
+                        <td><input type="radio" id="contactChoice1" name="contact" value="email" disabled/></td>
+                        <td><input type="radio" id="contactChoice1" name="contact" value="email" disabled/></td>
                     </fieldset>
                 </form>
                     <td>
                     </td>
                     </tr>
 
-                <tr>
-                    <td class="fw-bold">1</td>
-                    <td>FULLNAME</td>
-                    <form>
-                    <fieldset>
-                        <td><input type="radio" id="contactChoice1" name="contact" value="email"/></td>
-                        <td><input type="radio" id="contactChoice1" name="contact" value="email" /></td>
-                    </fieldset>
-                    </form>
-                    <td>
-                    </td>
-                    </tr>
+
 
 
 
@@ -137,7 +126,6 @@
     </div>
   </div>
   
-    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalAñadir">Registrar asistencia</button>
     
     <script>
 document.addEventListener('DOMContentLoaded', () => {

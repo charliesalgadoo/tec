@@ -88,11 +88,11 @@
             <input type="hidden" id="student-id" name="id">
             
             <div class="mb-3">
-              <label class="form-label">Nombre Completo</label>
+              <label class="form-label">Nombre Completo (inicia por apellidos y en mayuscula)</label>
               <input type="text" class="form-control" id="student-fullname" name="fullName" required>
             </div>
             <div class="mb-3">
-              <label class="form-label">Curp</label>
+              <label class="form-label">CURP</label>
               <input type="text" class="form-control" id="student-curp" name="curp" required>
             </div>
             <div class="mb-3">
