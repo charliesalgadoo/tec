@@ -15,8 +15,7 @@
 
   <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="home.php">
-        <img src="../assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
+      <a class="navbar-brand" href="home.php"> <img src="../assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
@@ -24,20 +23,14 @@
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link inactive" href="home.php">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Yo</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Estudiantes</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="scores.php">Calificaciones</a></li>
-              <li><a class="dropdown-item" href="attendances.php">Asistencias</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item active" href="students.php">Administra tus alumnos</a></li>
-            </ul>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="me.php">Yo</a></li>
+          <li class="nav-item"><a class="nav-link" href="teachers.php">Profesores</a></li>
+          <li class="nav-item"><a class="nav-link active" href="students.php">Alumnos</a></li>
+          <li class="nav-item"><a class="nav-link" href="groups.php">Grupos</a></li>
         </ul>
         <ul class="nav justify-content-end">
-          <li class="nav-item"><a class="btn btn-outline-danger" href="../login.php">Cerrar sesión</a></li>
+          <li class="nav-item"><a class="btn btn-outline-danger" href="../services/logout.php">Cerrar sesión</a></li>
         </ul>
       </div>
     </div>
@@ -45,10 +38,33 @@
 
   <div class="container w-100 text-center py-5">
     <h1 class="mb-4">Administrar estudiantes</h1>
-    
-    <button class="btn btn-outline-secondary mb-3" id="btnNuevoAlumno" data-bs-toggle="modal" data-bs-target="#modalEstudiante" data-mode="create">
-      + Agregar alumno
-    </button>
+
+    <div class="row justify-content-end mb-3">
+      <div class="col-md-4">
+        <button class="btn btn-outline-secondary mb-3" id="btnNuevoAlumno" data-bs-toggle="modal" data-bs-target="#modalEstudiante" data-mode="create">
+          + Agregar alumno
+        </button>
+        <form method="GET" action="">
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="fas fa-filter"></i></span>
+            <select class="form-select" name="group_id" onchange="this.form.submit()">
+              <option value="">Todos los grupos</option>
+              <?php
+                include('../api/conn.php');
+                $grupos = $conn->query("SELECT id, group_name FROM groups");
+                
+                $selected_group = $_GET['group_id'] ?? ''; 
+                while($g = $grupos->fetch_assoc()) {
+                    $sel = ($selected_group == $g['id']) ? 'selected' : '';
+                    echo "<option value='{$g['id']}' $sel>{$g['group_name']}</option>";
+                }
+              ?>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card border-0 shadow-sm">
 
     <div class="card border-0 shadow-sm">
       <div class="card-body">
@@ -107,6 +123,30 @@
               <label class="form-label">Contraseña</label>
               <input type="password" class="form-control" id="student-password" name="password" required>
             </div>
+
+            <div class="mb-3" id="div-group">
+                <label class="form-label">Asignar a Grupo</label>
+                <select class="form-select" id="student-group" name="group_id" required>
+                    <option value="" selected disabled>Selecciona un grupo...</option>
+                    <?php
+                    // Incluimos la conexión (asegúrate de que la ruta sea correcta)
+                    include('../api/conn.php'); 
+                    
+                    // Traemos los grupos y el nombre de su tutor
+                    $queryGrupos = "SELECT g.id, g.group_name, t.full_name 
+                                    FROM groups g 
+                                    LEFT JOIN teachers t ON g.teacher_id = t.id";
+                                    
+                    $resultadoGrupos = $conn->query($queryGrupos);
+                    
+                    while($grupo = $resultadoGrupos->fetch_assoc()) {
+                        $nombreProfe = $grupo['full_name'] ? $grupo['full_name'] : 'Sin asignar';
+                        echo "<option value='{$grupo['id']}'>{$grupo['group_name']} (Profe: {$nombreProfe})</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -215,7 +255,7 @@
             titulo.textContent = "Añadir Alumno";
             btnSubmit.textContent = "Agregar alumno";
             form.action = '../services/register_student.php';
-            form.reset() // Holaa charly, con esto se limpia solo el formulario verdad? asjdha
+            form.reset();
             document.getElementById('student-id').value = "";
             document.getElementById('student-mail').disabled = false;
             document.getElementById('student-password').disabled = false;

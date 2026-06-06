@@ -1,41 +1,42 @@
 <?php
-//se inicia la sesion para guardar roles y estados (como user_role o el email)
 session_start();
-
 include("../api/conn.php");
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$query = "SELECT email, user_role, pass FROM users WHERE email = ? LIMIT 1";
-
+$query = "SELECT id, email, user_role, pass FROM users WHERE email = ? LIMIT 1";
 $result = $conn->execute_query($query, [$email]);
-
 $user = $result->fetch_assoc();
 
-//condicion para saber si la contraseña es correcta
 if ($user && password_verify($password, $user['pass'])) {
     
-     //guardar las en la sesion roles y correo para proximas validaciones
     $_SESSION['email'] = $user['email'];
     $_SESSION['user_role'] = $user['user_role'];
-    echo $user['user_role'];
+    $_SESSION['user_id'] = $user['id'];
 
-    // si el rol es del profesor entonces redirife a el panel de control de profesor
     if ($user['user_role'] === 'TEACHER') {
+        $queryTeacher = "SELECT id FROM teachers WHERE user_id = ? LIMIT 1";
+        $stmtT = $conn->prepare($queryTeacher);
+        $stmtT->bind_param("i", $user['id']);
+        $stmtT->execute();
+        $resT = $stmtT->get_result()->fetch_assoc();
+        
+        $_SESSION['teacher_id'] = $resT['id']; 
+
         header("Location: ../teachers/home.php");
         exit();
         
-        // si el rol es de un alumno se redirige al panel del alumno
     } elseif ($user['user_role'] === 'STUDENT') {
         header("Location: ../students/home.php");
         exit();
         
-    } else { //si el rol no es ninguno de los anteriores entonces muestra un error
-        echo "Error, Rol del usuario no valido";
+    } elseif ($user['user_role'] === 'ADMIN') {
+        header("Location: ../admin/home.php"); 
+        exit();
     }
 
-} else { //si la contraseña falla sale un error
+} else {
     echo "El correo o contraseña son incorrectos";
 }
 ?>
