@@ -50,34 +50,37 @@
       </div>
     </nav>
     
-    <div class="body-container w-100 text-center py-5 m-auto text-align-center p-5 m-5 border-5 m-5">
-    <h1 id="greet-hour">Carlos</h1>
-      <h3 class="text-secondary">Tus accesos directos:</h2> <br>
+    <div class="body-container w-100 text-center py-5">
+      <h1 id="greet-hour"></h1>
+      <h3 class="text-secondary mb-4">Tus accesos directos:</h3>
 
-         <div class="col-sm-2">
-        <div class="card">
-        <div class="card-body">
-          <img src="../assets/icons/star.svg" width="50px">
-          <br><br>
-          <h5 class="card-title">Editar calificaciones</h5>
-          <p class="card-text">Añade, edita y administra las calificaciones de tu grupo.</p>
-          <a href="scores.php" class="btn btn-primary">Ir</a>
+      <div class="row justify-content-center g-4">
+        
+        <div class="col-md-4 col-lg-3">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <img src="../assets/icons/star.svg" width="50px" class="mb-3">
+              <h5 class="card-title">Editar calificaciones</h5>
+              <p class="card-text">Añade, edita y administra las calificaciones de tu grupo.</p>
+              <a href="scores.php" class="btn btn-primary">Ir</a>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
 
-      <div class="col-sm-2">
-      <div class="card">
-        <div class="card-body">
-          <img src="../assets/icons/person-check.svg" width="50px">
-           <br> <br>
-          <h5 class="card-title">Tomar asistencia</h5>
-          <p class="card-text">Reistra las asistencias, coloca justificantes y administra los ingresos de tu grupo.</p>
-          <a href="attendances.php" class="btn btn-primary">Ir</a>
+        <div class="col-md-4 col-lg-3">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <img src="../assets/icons/person-check.svg" width="50px" class="mb-3">
+              <h5 class="card-title">Tomar asistencia</h5>
+              <p class="card-text">Registra las asistencias, coloca justificantes y administra los ingresos de tu grupo.</p>
+              <a href="attendances.php" class="btn btn-primary">Ir</a>
+            </div>
+          </div>
         </div>
-      </div>
+
       </div>
     </div>
+    
     <script>
       const greetContainer = document.getElementById('greet-hour');
 
@@ -88,11 +91,11 @@
         let greet = "";
 
         if(time>=0 && time < 12){
-          greet="Buenos días, ";
+          greet="Buenos días";
         } else if(time>=12 && time<19){
-          greet="Buenas tardes, ";
+          greet="Buenas tardes";
         }else{
-          greet="Buenas noches, ";
+          greet="Buenas noches";
         }
         greetContainer.prepend(greet);
       }

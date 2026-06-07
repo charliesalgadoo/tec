@@ -1,3 +1,4 @@
+<!-- Esta vista aparece cuando hay un error de mysql-->
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
@@ -23,7 +24,7 @@
           <h1 class="fw-bold mb-3">¡Uy! Algo salió mal</h1>
           
           <p class="text-muted fs-5 mb-4">
-            No pudimos completar el registro. Es muy probable que el dato que intentas ingresar <strong>(correo electrónico, teléfono o nombre de grupo)</strong> ya exista en la base de datos.
+            Ocurrio un error inesperado en el <strong>servidor</strong>.
           </p>
           
           <button onclick="window.history.back();" class="btn btn-dark btn-lg rounded-pill px-4">

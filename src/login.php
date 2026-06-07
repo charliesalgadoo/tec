@@ -9,9 +9,7 @@
     <title>Iniciar sesión</title>
     <link rel="icon" type="svg+xml" href="assets/logo-icon.svg" />
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  </head>
-  
-      
+  </head>    
   
   <body>
     <header>

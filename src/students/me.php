@@ -29,36 +29,18 @@
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          
-          <?php if ($role === 'ADMIN'): ?>
-            <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link active" href="me.php">Yo</a></li>
-            <li class="nav-item"><a class="nav-link" href="teachers.php">Profesores</a></li>
-            <li class="nav-item"><a class="nav-link" href="students.php">Alumnos</a></li>
-            <li class="nav-item"><a class="nav-link" href="groups.php">Grupos</a></li>
-          
-          <?php elseif ($role === 'TEACHER'): ?>
-            <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link active" href="me.php">Yo</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Estudiantes</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="scores.php">Calificaciones</a></li>
-                <li><a class="dropdown-item" href="attendances.php">Asistencias</a></li>
-                <li><hr class="dropdown-divider"></li>
-              </ul>
-            </li>
-            
-          <?php elseif ($role === 'STUDENT'): ?>
-            <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link active" href="me.php">Yo</a></li>
-            <li><a class="dropdown-item" href="scores.php">Mis Calificaciones</a></li>
-            <li><a class="dropdown-item" href="attendances.php">Mis Asistencias</a></li>
-          <?php endif; ?>
-
+          <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
+          <li class="nav-item active"><a class="nav-link active" href="me.php">Yo</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Mi Historial</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="scores.php">Mis Calificaciones</a></li>
+              <li><a class="dropdown-item" href="attendances.php">Mis Asistencias</a></li>
+            </ul>
+          </li>
         </ul>
         <ul class="nav justify-content-end">
-          <li class="nav-item"><a class="btn btn-outline-danger" href="../services/logout.php">Cerrar sesión</a></li>
+          <li class="nav-item"><a class="btn btn-outline-danger" href="../login.php">Cerrar sesión</a></li>
         </ul>
       </div>
     </div>

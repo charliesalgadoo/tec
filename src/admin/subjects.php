@@ -8,7 +8,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Administración | Grupos</title>
+  <title>Administración | Materias</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -16,24 +16,23 @@
   
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body class="bg-light">
 
   <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="home.php"> <img src="../assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
-      </a>
+      <a class="navbar-brand" href="home.php"> <img src="../assets/logo-transparent-white.png" alt="Logo" width="150" height="auto"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
       </button>
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link inactive" href="home.php">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
           <li class="nav-item"><a class="nav-link" href="me.php">Yo</a></li>
           <li class="nav-item"><a class="nav-link" href="teachers.php">Profesores</a></li>
           <li class="nav-item"><a class="nav-link" href="students.php">Alumnos</a></li>
-          <li class="nav-item"><a class="nav-link active" href="groups.php">Grupos</a></li>
-          <li class="nav-item"><a class="nav-link" href="subjects.php">Materias</a></li>
+          <li class="nav-item"><a class="nav-link" href="groups.php">Grupos</a></li>
+          <li class="nav-item"><a class="nav-link active" href="subjects.php">Materias</a></li>
         </ul>
         <ul class="nav justify-content-end">
           <li class="nav-item"><a class="btn btn-outline-danger" href="../services/logout.php">Cerrar sesión</a></li>
@@ -43,12 +42,18 @@
   </nav>
 
   <div class="container w-100 text-center py-5">
-    <h1 class="mb-4">Administrar Grupos</h1>
-    
-    <button class="btn btn-outline-secondary mb-3" id="btnNuevoGrupo" data-bs-toggle="modal" data-bs-target="#modalGrupo" data-mode="create">
-      + Agregar grupo
-    </button>
+    <h1 class="mb-4">Administrar Materias</h1>
 
+    <div class="row justify-content-end mb-3">
+      <div class="col-md-4 text-end">
+        <!--boton para abrir el modal, indicamos que es modo creacion-->
+        <button class="btn btn-outline-secondary" id="btnNuevaMateria" data-bs-toggle="modal" data-bs-target="#modalMateria" data-mode="create">
+          + Agregar materia
+        </button>
+      </div>
+    </div>
+
+    <!--tabla de las materias-->
     <div class="card border-0 shadow-sm">
       <div class="card-body">
         <div class="table-responsive">
@@ -56,14 +61,14 @@
             <thead class="table-light text-secondary">
               <tr>
                 <th scope="col" class="py-3">ID</th>
-                <th scope="col" class="py-3">Nombre del Grupo</th>
-                <th scope="col" class="py-3">Profesor Asignado (Tutor)</th>
+                <th scope="col" class="py-3">Nombre de la Materia</th>
+                <th scope="col" class="py-3">Profesor Titular</th>
                 <th scope="col" class="py-3">Acciones</th>
               </tr>
             </thead>
             <tbody>
-                <!--renderizado de grupos disponibles en la base de datos-->
-              <?php include_once("../services/get_groups.php"); ?>       
+              <!--cargamos la tabla desde el servicio-->
+              <?php include_once("../services/get_subjects.php"); ?>       
             </tbody>
           </table>
         </div>
@@ -71,35 +76,32 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modalGrupo" tabindex="-1" aria-hidden="true">
+  <!--modal reutilizable para crear y editar-->
+  <div class="modal fade" id="modalMateria" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalTitulo">Gestión de Grupo</h5>
+          <h5 class="modal-title" id="modalTitulo">Gestión de Materia</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         
-        <form id="formGrupo" method="POST" action="">
+        <form id="formMateria" method="POST" action="">
           <div class="modal-body text-start">
-            <input type="hidden" id="group-id" name="id">
+            <!--input oculto pal id-->
+            <input type="hidden" id="subject-id" name="id">
             
             <div class="mb-3">
-              <label class="form-label">Nombre del Grupo (Ej: 4A)</label>
-              <input type="text" class="form-control" id="group-name" name="group_name" maxlength="2" required>
+              <label class="form-label">Nombre de la Materia</label>
+              <input type="text" class="form-control" id="subject-name" name="subject_name" required>
             </div>
             
             <div class="mb-3">
               <label class="form-label">Asignar Profesor</label>
-              <select class="form-select" id="group-teacher" name="teacher_id" required>
-                <option value="" selected disabled>Selecciona un profesor..</option>
+              <select class="form-select" id="subject-teacher" name="teacher_id" required>
+                <option value="" selected disabled>Selecciona un profesor...</option>
                 <?php
-                  // obtener la conexion para hacer consultas
-                  include('../api/conn.php'); 
-
-                  //query para obtener datos basicos del profesor
-                  $profes = $conn->query("SELECT id, full_name FROM teachers");
-
-                  //recorrer los resultados y agregarlos como elemento seleccionable a las opciones
+                  include('../api/conn.php'); //conexion a la bd
+                  $profes = $conn->query("SELECT id, full_name FROM teachers"); //traemos a todos los profes
                   while($profe = $profes->fetch_assoc()) {
                       echo "<option value='{$profe['id']}'>{$profe['full_name']}</option>";
                   }
@@ -109,6 +111,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <!--boton de guardar q se vuelve editar o crear-->
             <button type="submit" class="btn btn-primary" id="btnSubmitModal">Guardar</button>
           </div>
         </form>
@@ -116,6 +119,7 @@
     </div>
   </div>
 
+  <!--modal de confirmacion de borrar-->
   <div class="modal fade" id="modalEliminar" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -123,12 +127,13 @@
           <h5 class="modal-title">Confirmar Eliminación</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        
-        <form id="formEliminar" method="POST" action="../services/delete_group.php">
+        <!--form pa borrar-->
+        <form id="formEliminar" method="POST" action="../services/delete_subject.php">
           <div class="modal-body text-center py-4">
             <i class="fas fa-exclamation-triangle text-warning fs-1 mb-3"></i>
-            <p class="fs-5">¿Estás seguro de eliminar este grupo?</p>
-            <p class="text-muted small">Los estudiantes en este grupo se quedarán sin asignar.</p>
+            <p class="fs-5">¿Seguro que deseas eliminar esta materia?</p>
+            <p class="text-muted small">Se borrarán todas las calificaciones y asistencias relacionadas.</p>
+            <!--id a eliminar-->
             <input type="hidden" id="delete-id" name="id">
           </div>
           <div class="modal-footer justify-content-center">
@@ -141,62 +146,45 @@
   </div>
 
   <script>
-    //cargar script cuando la pagina este lista para evitar punteros a null
+    //cuando el documento ya cargo todo
     document.addEventListener('DOMContentLoaded', () => {
-
-    // obtener elementos HTML por su iD
-      const modalGrupo = document.getElementById('modalGrupo');
+      const modalMateria = document.getElementById('modalMateria');
       const modalEliminar = document.getElementById('modalEliminar');
 
-      //validar si modalEliminar esta presente (es diferente de null)
+      //si se abre el modal de eliminar, capturamos el id q viene del boton
       if (modalEliminar) {
-        //evento de Bootstrap para modales
         modalEliminar.addEventListener('show.bs.modal', event => {
-          //obtener el elemento con el que se abrio el modal, osea el boton
           const boton = event.relatedTarget;
-          //asignar el valor del id "guardado" en el boton
           document.getElementById('delete-id').value = boton.getAttribute('data-id');
         });
       }
-      
-      //validar si modal esta presente (diferente de null)
-      if (modalGrupo) {
-        //evento de bootstrap para modal
-        modalGrupo.addEventListener('show.bs.modal', event => {
-          const boton = event.relatedTarget; // elemento que abrio el modal 
-          
-          //formulario
-          const form = document.getElementById('formGrupo');
-          //elemento dinamico con el titulo del modal
+
+      //si se abre el modal de editar/crear
+      if (modalMateria) {
+        modalMateria.addEventListener('show.bs.modal', event => {
+          const boton = event.relatedTarget; 
+          const form = document.getElementById('formMateria');
           const titulo = document.getElementById('modalTitulo');
-          //boton dinamico  del modal para enviar datos
           const btnSubmit = document.getElementById('btnSubmitModal');
+          const isCreateMode = boton.getAttribute('data-mode') === 'create'; //vemos si es modo crear
 
-          //modo de edicion
-          //guarda un booleano dependiendo si es modo de creacion o no
-          const isCreateMode = boton.getAttribute('data-mode') === 'create';
-
-          // si esta en modo de creacion (para hacer insert)
+          //si es modo crear le ponemos todo en blanco y cambiamos la accion
           if (isCreateMode) {
-
-            titulo.textContent = "Añadir Grupo"; //poner el titulo del modal
-            btnSubmit.textContent = "Crear grupo"; //titulo
-
-            //si es modo de creacion, se envian a register_group.php
-            form.action = '../services/register_group.php';
-
-            form.reset(); // vaciar los campos del formulario al terminar
-            document.getElementById('group-id').value = ""; //eliminar el id
-
-          } else { //si el modo no es creacion, entonces es de actualizacion
-            titulo.textContent = "Editar Grupo"; /
-            btnSubmit.textContent = 'Guardar Cambios'; 
-            form.action = "../services/update_group.php"; // Si creas el update después
+            titulo.textContent = "Añadir Materia";
+            btnSubmit.textContent = "Crear materia";
+            form.action = '../services/register_subject.php'; 
+            form.reset();
+            document.getElementById('subject-id').value = "";
+          } else {
+            //si no, es editar
+            titulo.textContent = "Editar Materia";
+            btnSubmit.textContent = "Guardar cambios";
+            form.action = '../services/update_subject.php'; 
             
-            //rellenar los campos con los valores correspondientes
-            document.getElementById('group-id').value = boton.getAttribute('data-id');
-            document.getElementById('group-name').value = boton.getAttribute('data-name');
-            document.getElementById('group-teacher').value = boton.getAttribute('data-teacher');
+            //rellenamos los datos del boton en el form para que aparezcan ya escritos
+            document.getElementById('subject-id').value = boton.getAttribute('data-id');
+            document.getElementById('subject-name').value = boton.getAttribute('data-name');
+            document.getElementById('subject-teacher').value = boton.getAttribute('data-teacher');
           }
         });
       }

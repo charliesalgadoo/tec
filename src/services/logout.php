@@ -1,16 +1,10 @@
 <?php
-    
-    if (isset($_SESSION['email']))
-        $_SESSION['email'] = '';
+    session_start();
 
-    if (isset($_SESSION['user_role']))
-        $_SESSION['user_role'] = '';
-    
-    if (isset($_SESSION['user_id']))
-       $_SESSION['user_id'] = '';
+    session_unset();
 
-    if (isset($_SESSION['teacher_id']))
-        $_SESSION['teacher_id'] = '';
+    session_destroy();
 
     header("Location: ../login.php");
+    exit();
 ?>

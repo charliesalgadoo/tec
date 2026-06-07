@@ -1,3 +1,8 @@
+<?php
+// validacion de usuario (RBAC)
+  include_once('../services/auth.php');
+  require_role('ADMIN'); //rol necesario
+?>
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
@@ -28,6 +33,7 @@
           <li class="nav-item"><a class="nav-link active" href="teachers.php">Profesores</a></li>
           <li class="nav-item"><a class="nav-link" href="students.php">Alumnos</a></li>
           <li class="nav-item"><a class="nav-link" href="groups.php">Grupos</a></li>
+          <li class="nav-item"><a class="nav-link" href="subjects.php">Materias</a></li>
         </ul>
         <ul class="nav justify-content-end">
           <li class="nav-item"><a class="btn btn-outline-danger" href="../services/logout.php">Cerrar sesión</a></li>

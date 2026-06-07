@@ -1,7 +1,9 @@
 <?php
-  include_once("../services/get_profile.php");
+// validacion de usuario (RBAC)
+  include("../services/get_profile.php");
+  include('../services/auth.php');
   
-  $role = $profileData['user_role'] ?? '';
+  require_role('ADMIN'); //rol necesario
 ?>
 <!DOCTYPE html>
 <html lang="es-MX">
@@ -29,33 +31,12 @@
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          
-          <?php if ($role === 'ADMIN'): ?>
-            <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link active" href="me.php">Yo</a></li>
-            <li class="nav-item"><a class="nav-link" href="teachers.php">Profesores</a></li>
-            <li class="nav-item"><a class="nav-link" href="students.php">Alumnos</a></li>
-            <li class="nav-item"><a class="nav-link" href="groups.php">Grupos</a></li>
-          
-          <?php elseif ($role === 'TEACHER'): ?>
-            <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link active" href="me.php">Yo</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Estudiantes</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="scores.php">Calificaciones</a></li>
-                <li><a class="dropdown-item" href="attendances.php">Asistencias</a></li>
-                <li><hr class="dropdown-divider"></li>
-              </ul>
-            </li>
-            
-          <?php elseif ($role === 'STUDENT'): ?>
-            <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link active" href="me.php">Yo</a></li>
-            <li><a class="dropdown-item" href="scores.php">Mis Calificaciones</a></li>
-            <li><a class="dropdown-item" href="attendances.php">Mis Asistencias</a></li>
-          <?php endif; ?>
-
+          <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="me.php">Yo</a></li>
+          <li class="nav-item"><a class="nav-link" href="teachers.php">Profesores</a></li>
+          <li class="nav-item"><a class="nav-link" href="students.php">Alumnos</a></li>
+          <li class="nav-item"><a class="nav-link" href="groups.php">Grupos</a></li>
+          <li class="nav-item"><a class="nav-link" href="subjects.php">Materias</a></li>
         </ul>
         <ul class="nav justify-content-end">
           <li class="nav-item"><a class="btn btn-outline-danger" href="../services/logout.php">Cerrar sesión</a></li>
@@ -74,50 +55,37 @@
           <div class="card-body">
             
             <div class="mb-4 text-primary">
-              <?php if ($role === 'ADMIN'): ?>
                 <i class="fas fa-user-shield fa-5x"></i>
-              <?php elseif ($role === 'TEACHER'): ?>
-                <i class="fas fa-chalkboard-user fa-5x text-success"></i>
-              <?php elseif ($role === 'STUDENT'): ?>
-                <i class="fas fa-user-graduate fa-5x text-info"></i>
-              <?php endif; ?>
             </div>
             
             <h3 class="card-title fw-bold mb-1"><?= htmlspecialchars($profileData['full_name']) ?></h3>
             <span class="badge bg-dark mb-3 px-3 py-2 fs-6 rounded-pill">
-              <?php
-                if ($role === 'ADMIN') echo '<i class="fas fa-crown"></i> Administrador';
-                if ($role === 'TEACHER') echo '<i class="fas fa-briefcase"></i> Profesor';
-                if ($role === 'STUDENT') echo '<i class="fas fa-book"></i> Estudiante';
-              ?>
+              <i class="fas fa-crown"></i> Administrador
             </span>
             
             <hr class="my-4 w-75 mx-auto">
             
             <div class="text-start px-4">
               
+            <!-- datos dinamicos-->
+             <!-- colocar el correo-->
               <p class="mb-3 fs-5 border-bottom pb-2">
                 <i class="fas fa-envelope text-secondary me-2"></i> <strong>Correo:</strong> <br>
-                <span class="text-muted fs-6 ms-4"><?= htmlspecialchars($profileData['email']) ?></span>
+                <span class="text-muted fs-6 ms-4"><?= $profileData['email'] ?></span>
               </p>
               
+               <!-- colocar elnumero del admin si exta presente -->
               <?php if (!empty($profileData['phone_number'])): ?>
               <p class="mb-3 fs-5 border-bottom pb-2">
                 <i class="fas fa-phone text-secondary me-2"></i> <strong>Teléfono:</strong> <br>
-                <span class="text-muted fs-6 ms-4"><?= htmlspecialchars($profileData['phone_number']) ?></span>
+                <span class="text-muted fs-6 ms-4"><?= $profileData['phone_number'] ?></span>
               </p>
               <?php endif; ?>
 
-              <?php if (!empty($profileData['curp'])): ?>
-              <p class="mb-3 fs-5 border-bottom pb-2">
-                <i class="fas fa-id-card text-secondary me-2"></i> <strong>CURP:</strong> <br>
-                <span class="text-muted fs-6 ms-4"><?= htmlspecialchars($profileData['curp']) ?></span>
-              </p>
-              <?php endif; ?>
-              
+              <!--colocar el id -->
               <p class="mb-2 fs-5">
                 <i class="fas fa-hashtag text-secondary me-2"></i> <strong>ID de Sistema:</strong> <br>
-                <span class="text-muted fs-6 ms-4">#<?= htmlspecialchars($_SESSION['user_id']) ?></span>
+                <span class="text-muted fs-6 ms-4">#<?= $_SESSION['user_id'] ?></span>
               </p>
 
             </div>
