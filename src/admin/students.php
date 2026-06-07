@@ -1,9 +1,14 @@
+<?php
+// validacion de usuario (RBAC)
+  include_once('../services/auth.php');
+  require_role('ADMIN'); //rol necesario
+?>
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calificaciones | Maestros</title>
+  <title>Administracion | Alumnos</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -15,8 +20,7 @@
 
   <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="home.html">
-        <img src="../assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
+      <a class="navbar-brand" href="home.php"> <img src="../assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
@@ -24,20 +28,15 @@
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link inactive" href="home.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Yo</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Estudiantes</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="scores.html">Calificaciones</a></li>
-              <li><a class="dropdown-item" href="attendances.html">Asistencias</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item active" href="students.html">Administra tus alumnos</a></li>
-            </ul>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="home.php">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="me.php">Yo</a></li>
+          <li class="nav-item"><a class="nav-link" href="teachers.php">Profesores</a></li>
+          <li class="nav-item"><a class="nav-link active" href="students.php">Alumnos</a></li>
+          <li class="nav-item"><a class="nav-link" href="groups.php">Grupos</a></li>
+          <li class="nav-item"><a class="nav-link" href="subjects.php">Materias</a></li>
         </ul>
         <ul class="nav justify-content-end">
-          <li class="nav-item"><a class="btn btn-outline-danger" href="../login.html">Cerrar sesión</a></li>
+          <li class="nav-item"><a class="btn btn-outline-danger" href="../services/logout.php">Cerrar sesión</a></li>
         </ul>
       </div>
     </div>
@@ -45,11 +44,44 @@
 
   <div class="container w-100 text-center py-5">
     <h1 class="mb-4">Administrar estudiantes</h1>
-    
-    <button class="btn btn-outline-secondary mb-3" id="btnNuevoAlumno" data-bs-toggle="modal" data-bs-target="#modalEstudiante" data-mode="create">
-      + Agregar alumno
-    </button>
 
+    <div class="row justify-content-end mb-3">
+      <div class="col-md-4">
+        <button class="btn btn-outline-secondary mb-3" id="btnNuevoAlumno" data-bs-toggle="modal" data-bs-target="#modalEstudiante" data-mode="create">
+          + Agregar alumno
+        </button>
+        <form method="GET" action="">
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="fas fa-filter"></i></span>
+            <select class="form-select" name="group_id" onchange="this.form.submit()">
+
+              <option value="">Todos los grupos</option>
+              <?php
+                include('../api/conn.php'); //obtener conexion
+                
+                //consulta para obtener todos los grupos
+                $grupos = $conn->query("SELECT id, group_name FROM groups");
+                
+                //obtener el id de los parametros de la url, si no hay, poner la seleccion vacia
+                $selected_group = $_GET['group_id'] ?? ''; 
+
+                //recorrer los grupos obtenidos
+                while($g = $grupos->fetch_assoc()) {
+                  // si el id seleccionado es el mismo que el id de algun grupo
+                  // ponemos selected en la etiqueta para indicar que esta seleccionado
+                  //a la hora de hacer refresh no se quite la seleccion
+                    $sel = ($selected_group == $g['id']) ? 'selected' : '';
+
+                    //asignamos como valor de la seleccion el Id
+                    echo "<option value='{$g['id']}' $sel>{$g['group_name']}</option>";
+                }
+              ?>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+    
     <div class="card border-0 shadow-sm">
       <div class="card-body">
         <div class="table-responsive">
@@ -66,8 +98,8 @@
               </tr>
             </thead>
             <tbody>
-              
-              <?php include_once("../services/get_students.php"); ?>       
+            <!-- incluimos el servicio para obtener los estudiantes-->
+               <?php include_once("../services/get_students.php"); ?>       
             </tbody>
           </table>
         </div>
@@ -107,6 +139,30 @@
               <label class="form-label">Contraseña</label>
               <input type="password" class="form-control" id="student-password" name="password" required>
             </div>
+
+            <div class="mb-3" id="div-group">
+                <label class="form-label">Asignar a Grupo</label>
+                <select class="form-select" id="student-group" name="group_id" required>
+                    <option value="" selected disabled>Selecciona un grupo...</option>
+                    <?php
+                    include('../api/conn.php'); //conexioon
+                    
+                    //seleccionamos el grupo y nombredel profesor con un join
+                    $queryGrupos = "SELECT g.id, g.group_name, t.full_name 
+                                    FROM groups g 
+                                    LEFT JOIN teachers t ON g.teacher_id = t.id";
+                                    
+                    $resultadoGrupos = $conn->query($queryGrupos);
+                    
+                    //agregamos los elementos a las opcciones
+                    while($grupo = $resultadoGrupos->fetch_assoc()) {
+                        $nombreProfe = $grupo['full_name'] ? $grupo['full_name'] : 'Sin asignar';
+                        echo "<option value='{$grupo['id']}'>{$grupo['group_name']} (Profe: {$nombreProfe})</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -143,63 +199,24 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modalEliminar" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalTitulo">Gestión de Alumno</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        
-        <form id="formEstudiante" method="POST" action="">
-          <div class="modal-body">
-            <input type="hidden" id="student-id" name="id">
-            
-            <div class="mb-3">
-              <label class="form-label">Nombre Completo</label>
-              <input type="text" class="form-control" id="student-fullname" name="fullName" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Curp</label>
-              <input type="text" class="form-control" id="student-curp" name="curp" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Número de teléfono</label>
-              <input type="text" class="form-control" id="student-phone" name="phone" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Correo</label>
-              <input type="email" class="form-control" id="student-mail" name="email" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="student-password" name="password" required>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" id="btnSubmitModal">Guardar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-
   <script>
+    //cuando el documento este listo
     document.addEventListener('DOMContentLoaded', () => {
       const modalEstudiante = document.getElementById('modalEstudiante');
       const modalEliminar = document.getElementById('modalEliminar');
 
+      //si el modal eliminar existe
       if (modalEliminar) {
+        //escucha el evento cuando se abre
         modalEliminar.addEventListener('show.bs.modal', event => {
           const boton = event.relatedTarget;
-          const id = boton.getAttribute('data-id');
+          const id = boton.getAttribute('data-id'); //obtenemos el id del data-id
           
-          document.getElementById('delete-id').value = id;
+          document.getElementById('delete-id').value = id; //lo ponemos en el input oculto
         });
       }
       
+      //si el modal de editar/crear existe
       if (modalEstudiante) {
         modalEstudiante.addEventListener('show.bs.modal', event => {
           const boton = event.relatedTarget; 
@@ -214,22 +231,26 @@
 
             titulo.textContent = "Añadir Alumno";
             btnSubmit.textContent = "Agregar alumno";
-            form.action = '../services/register_student.php';
-            form.reset() // Holaa charly, con esto se limpia solo el formulario verdad? asjdha
+            form.action = '../services/register_student.php'; //destino de creacion
+            form.reset();
             document.getElementById('student-id').value = "";
+            document.getElementById('student-mail').disabled = false;
+            document.getElementById('student-password').disabled = false;
 
           } else {
             
             titulo.textContent = "Editar Alumno"; // PAra que sea dinamico, osea, no poner dos modales,. solo 1 reutilizable kajsd
             btnSubmit.textContent = 'Guardar Cambios'; // 
-            form.action = "../services/update_student.php"; // Aqui ps cambie el servicio por si es update o insert
+            form.action = "../services/update_student.php"; // indicamos que debemos enviar a update_student.php
             
+            //llenamos los campos con los datos del boton
             document.getElementById('student-id').value = boton.getAttribute('data-id');
             document.getElementById('student-fullname').value = boton.getAttribute('data-fullname');
             document.getElementById('student-curp').value = boton.getAttribute('data-curp');
             document.getElementById('student-phone').value = boton.getAttribute('data-phone');
             document.getElementById('student-mail').value = boton.getAttribute('data-mail');
 
+            //desactivamos campos que no se pueden editar
             document.getElementById('student-mail').disabled = true;
             document.getElementById('student-password').disabled = true;
           }

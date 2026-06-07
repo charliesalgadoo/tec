@@ -1,5 +1,5 @@
-
 <?php
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     include('../api/conn.php'); 
 
     $studentFullName = $_POST['fullName'];
@@ -7,30 +7,35 @@
     $password = $_POST['password'];
     $curp = $_POST['curp'];
     $phone = $_POST['phone'];
+    $groupId = $_POST['group_id']; 
 
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql_user = "INSERT INTO users (email, pass, user_role) VALUES (?, ?, 'STUDENT')";
-    $stmt_user = $conn->prepare($sql_user);
-    $stmt_user->bind_param("ss", $email, $hash);
-    $stmt_user->execute();
+    try {
+        $sql_user = "INSERT INTO users (email, pass, user_role) VALUES (?, ?, 'STUDENT')";
+        $stmt_user = $conn->prepare($sql_user);
+        $stmt_user->bind_param("ss", $email, $hash);
+        $stmt_user->execute();
 
-    $userId = $conn->insert_id;
+        $userId = $conn->insert_id; 
 
-    $sql_student = "INSERT INTO students (full_name, curp, phone_number, user_id) VALUES (?, ?, ?, ?)";
-    $stmt_student = $conn->prepare($sql_student);
-    $stmt_student->bind_param("sssi", $studentFullName, $curp, $phone, $userId);
-    $stmt_student->execute();
+        $sql_student = "INSERT INTO students (full_name, curp, phone_number, user_id) VALUES (?, ?, ?, ?)";
+        $stmt_student = $conn->prepare($sql_student);
+        $stmt_student->bind_param("sssi", $studentFullName, $curp, $phone, $userId);
+        $stmt_student->execute();
 
+        $studentId = $conn->insert_id; 
+
+        $sql_enroll = "INSERT INTO groups_students (enrollment_date, student_id, group_id) VALUES (CURDATE(), ?, ?)";
+        $stmt_enroll = $conn->prepare($sql_enroll);
+        $stmt_enroll->bind_param("ii", $studentId, $groupId);
+        $stmt_enroll->execute();
+
+        header("Location: ../admin/students.php?success=1");
+        exit();
+
+    } catch (mysqli_sql_exception $e) {
+        header("Location: ../admin/error.php");
+        exit();
+    }
 ?>
-
-<head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-<link rel="icon" type="svg+xml" href="../assets/logo-icon.svg" />
-<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<h3>Alumno creado.</h3>
-<a href="../teachers/students.php" class="btn btn-primary">Regresar</a>

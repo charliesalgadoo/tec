@@ -49,7 +49,7 @@
           <ul class="nav justify-content-end">
             <li class="nav-item">
                 <li class="nav-item">
-                    <a class="btn btn-outline-primary" href="login.html">Iniciar sesión</a>
+                    <a class="btn btn-outline-primary" href="login.php">Iniciar sesión</a>
                   </li>
               </li>
           </ul>
@@ -80,7 +80,7 @@
         <div class="carousel-caption"> 
         <h1 class="primar">Bienvenido a tu casa</h1> 
         <p>Bienvenido al Tec de Monterrey</p> 
-        <p><a class="btn btn-lg btn-primary" href="login.html">Inicia sesión</a></p> </div>
+        <p><a class="btn btn-lg btn-primary" href="login.php">Inicia sesión</a></p> </div>
     </div>
       
 
