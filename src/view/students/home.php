@@ -11,7 +11,7 @@
   </head>
   <body>
    
-    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary " data-bs-theme="dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="home.php">
           <img src="../../assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
@@ -46,9 +46,9 @@
       <div class="row justify-content-center g-4">
         
         <div class="col-md-4 col-lg-3">
-          <div class="card h-100 shadow-sm border-0">
+          <div class="card h-100  border-0">
             <div class="card-body">
-              <img src="../assets/icons/star.svg" width="50px" class="mb-3">
+              <img src="../../assets/icons/star.svg" width="50px" class="mb-3">
               <h5 class="card-title">Ver mis calificaciones</h5>
               <p class="card-text">Revisa las calificaciones de cada materia.</p>
               <a href="scores.php" class="btn btn-primary">Ir</a>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="col-md-4 col-lg-3">
-          <div class="card h-100 shadow-sm border-0">
+          <div class="card h-100  border-0">
             <div class="card-body">
               <img src="../../assets/icons/person-check.svg" width="50px" class="mb-3">
               <h5 class="card-title">Ver asistencias</h5>

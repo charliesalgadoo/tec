@@ -45,7 +45,6 @@ include_once("../../services/scores/get_scores_list.php");
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="scores.php">Calificaciones</a></li>
                 <li><a class="dropdown-item" href="attendances.php">Asistencias</a></li>
-                <li><hr class="dropdown-divider"></li>
               </ul>
             </li>
           </ul>
@@ -68,7 +67,7 @@ include_once("../../services/scores/get_scores_list.php");
       <div class="row justify-content-center mb-4 mt-4">
         <div class="col-md-5">
           <form method="GET" action="">
-            <div class="input-group shadow-sm">
+            <div class="input-group ">
               <span class="input-group-text bg-dark text-white"><i class="fas fa-filter"></i> &nbsp;Filtrar Grupo</span>
               <select class="form-select" name="group_id" onchange="this.form.submit()">
                 <option value="">Todos mis grupos</option>
@@ -86,7 +85,7 @@ include_once("../../services/scores/get_scores_list.php");
       </div>
       <form action="../../services/scores/save_scores.php" method="POST">
         <div class="container">
-          <div class="card border-0 shadow-sm">
+          <div class="card border-0 ">
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table">

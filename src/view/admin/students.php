@@ -82,7 +82,7 @@
       </div>
     </div>
     
-    <div class="card border-0 shadow-sm">
+    <div class="card border-0 ">
       <div class="card-body">
         <div class="table-responsive">
           <table class="table align-middle">

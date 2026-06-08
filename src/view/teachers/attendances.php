@@ -36,8 +36,6 @@ include("../../services/attendances/get_attendance_list.php");
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="scores.php">Calificaciones</a></li>
                 <li><a class="dropdown-item active" href="attendances.php">Asistencias</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="students.php">Administra tus alumnos</a></li>
               </ul>
             </li>
           </ul>
@@ -75,7 +73,7 @@ include("../../services/attendances/get_attendance_list.php");
         <input type="hidden" name="group_id" value="<?= htmlspecialchars($filterGroupId) ?>">
 
         <div class="container">
-          <div class="card border-0 shadow-sm">
+          <div class="card border-0 ">
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table">

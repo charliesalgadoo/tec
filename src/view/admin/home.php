@@ -47,7 +47,7 @@
       <div class="row justify-content-center g-4">
         
         <div class="col-md-3 col-lg-2">
-          <div class="card h-100 shadow-sm border-0">
+          <div class="card h-100  border-0">
             <div class="card-body">
               <img src="../../assets/icons/person-gear.svg" width="50px" class="mb-3">
               <h5 class="card-title">Alumnos</h5>
@@ -58,7 +58,7 @@
         </div>
 
         <div class="col-md-3 col-lg-2">
-          <div class="card h-100 shadow-sm border-0">
+          <div class="card h-100  border-0">
             <div class="card-body">
               <img src="../../assets/icons/person-gear.svg" width="50px" class="mb-3">
               <h5 class="card-title">Profesores</h5>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="col-md-3 col-lg-2">
-          <div class="card h-100 shadow-sm border-0">
+          <div class="card h-100  border-0">
             <div class="card-body">
               <img src="../../assets/icons/person-gear.svg" width="50px" class="mb-3">
               <h5 class="card-title">Grupos</h5>
@@ -80,7 +80,7 @@
         </div>
 
         <div class="col-md-3 col-lg-2">
-          <div class="card h-100 shadow-sm border-0">
+          <div class="card h-100  border-0">
             <div class="card-body">
               <img src="../../assets/icons/person-gear.svg" width="50px" class="mb-3">
               <h5 class="card-title">Materias</h5>

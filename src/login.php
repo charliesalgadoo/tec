@@ -15,7 +15,7 @@
     <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="home.php"> <img src="assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
+        <a class="navbar-brand" href="index.php"> <img src="assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
           <span class="navbar-toggler-icon"></span>

@@ -20,7 +20,7 @@
 </head>
 <body class="bg-light">
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary " data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="home.php">
         <img src="../../assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
@@ -51,7 +51,7 @@
         
         <h2 class="text-center mb-4">Mi Perfil</h2>
         
-        <div class="card border-0 shadow text-center pt-4 pb-3 rounded-4">
+        <div class="card border-0  text-center pt-4 pb-3 rounded-4">
           <div class="card-body">
             
             <div class="mb-4 text-primary">

@@ -39,7 +39,6 @@
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="scores.php">Calificaciones</a></li>
                 <li><a class="dropdown-item" href="attendances.php">Asistencias</a></li>
-                <li><hr class="dropdown-divider"></li>
               </ul>
             </li>
           </ul>
@@ -62,9 +61,9 @@
       <div class="row justify-content-center g-4">
         
         <div class="col-md-4 col-lg-3">
-          <div class="card h-100 shadow-sm border-0">
+          <div class="card h-100  border-0">
             <div class="card-body">
-              <img src="../assets/icons/star.svg" width="50px" class="mb-3">
+              <img src="../../assets/icons/star.svg" width="50px" class="mb-3">
               <h5 class="card-title">Editar calificaciones</h5>
               <p class="card-text">Añade, edita y administra las calificaciones de tu grupo.</p>
               <a href="scores.php" class="btn btn-primary">Ir</a>
@@ -73,9 +72,9 @@
         </div>
 
         <div class="col-md-4 col-lg-3">
-          <div class="card h-100 shadow-sm border-0">
+          <div class="card h-100  border-0">
             <div class="card-body">
-              <img src="../assets/icons/person-check.svg" width="50px" class="mb-3">
+              <img src="../../assets/icons/person-check.svg" width="50px" class="mb-3">
               <h5 class="card-title">Tomar asistencia</h5>
               <p class="card-text">Registra las asistencias, coloca justificantes y administra los ingresos de tu grupo.</p>
               <a href="attendances.php" class="btn btn-primary">Ir</a>

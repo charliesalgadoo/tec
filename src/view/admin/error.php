@@ -15,7 +15,7 @@
   <div class="container text-center">
     <div class="row justify-content-center">
       <div class="col-md-6 col-lg-5">
-        <div class="card border-0 shadow-lg rounded-4 p-5">
+        <div class="card border-0 -lg rounded-4 p-5">
           
           <div class="text-danger mb-4">
             <i class="fas fa-exclamation-triangle fa-5x"></i>

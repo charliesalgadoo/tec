@@ -40,7 +40,7 @@ $attendances = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 </head>
 <body class="bg-light">
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary " data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="home.php">
         <img src="../../assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
@@ -71,7 +71,7 @@ $attendances = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
   <div class="container py-5">
     <h1 class="text-center mb-4">Mi Historial de Asistencias</h1>
     
-    <div class="card border-0 shadow-sm mx-auto" style="max-width: 800px;">
+    <div class="card border-0  mx-auto" style="max-width: 800px;">
       <div class="card-body p-0">
         <div class="table-responsive">
           <table class="table table-hover align-middle mb-0 text-center">
