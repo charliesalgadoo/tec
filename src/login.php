@@ -15,10 +15,17 @@
     <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">
-            <img src="assets/logo-transparent-white.png" alt="Bootstrap" width="150" height="auto">
-          </a>
-
+        <a class="navbar-brand" href="home.php"> <img src="assets/logo-transparent-white.png" alt="Logo" width="150" height="auto">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link inactive" href="index.php">Inicio</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
     </header>
